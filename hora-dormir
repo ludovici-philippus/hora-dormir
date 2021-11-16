@@ -1,0 +1,11 @@
+#!/bin/sh
+
+time=$(date '+%H');
+DORMIR=22;
+ACORDAR=6;
+PASSWORD="tua-senha";
+
+[ "$time" -lt "$DORMIR" ] && falta=$(((${DORMIR}-${time})*60*60)) && sleep $(($falta-600)) && notify-send "SONO" "Tá chegando a hora de dormir, se prepare! Você tem 10 minutos!" -u critical -i clock && echo $PASSWORD | sudo -S shutdown -h +10 &
+
+[ "$time" -lt "$ACORDAR" ] && echo $PASSWORD | sudo -S shutdown now;
+[ "$time" -gt "$DORMIR" ] && echo $PASSWORD | sudo -S shutdown now;
